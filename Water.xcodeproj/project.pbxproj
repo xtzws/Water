@@ -11,6 +11,7 @@
 		6A52D5282B4362570055C58D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A52D5272B4362570055C58D /* ContentView.swift */; };
 		6A52D52A2B43625A0055C58D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A52D5292B43625A0055C58D /* Assets.xcassets */; };
 		6A52D52D2B43625A0055C58D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A52D52C2B43625A0055C58D /* Preview Assets.xcassets */; };
+		6A69650E2B4939A000E09A39 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A69650D2B4939A000E09A39 /* HealthKitManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,8 @@
 		6A52D5272B4362570055C58D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6A52D5292B43625A0055C58D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A52D52C2B43625A0055C58D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6A52D5332B4363350055C58D /* Water.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Water.entitlements; sourceTree = "<group>"; };
+		6A69650D2B4939A000E09A39 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +54,9 @@
 		6A52D5242B4362570055C58D /* Water */ = {
 			isa = PBXGroup;
 			children = (
+				6A52D5332B4363350055C58D /* Water.entitlements */,
 				6A52D5252B4362570055C58D /* WaterApp.swift */,
+				6A69650D2B4939A000E09A39 /* HealthKitManager.swift */,
 				6A52D5272B4362570055C58D /* ContentView.swift */,
 				6A52D5292B43625A0055C58D /* Assets.xcassets */,
 				6A52D52B2B43625A0055C58D /* Preview Content */,
@@ -139,6 +144,7 @@
 			files = (
 				6A52D5282B4362570055C58D /* ContentView.swift in Sources */,
 				6A52D5262B4362570055C58D /* WaterApp.swift in Sources */,
+				6A69650E2B4939A000E09A39 /* HealthKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,17 +275,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Water/Water.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Water/Preview Content\"";
 				DEVELOPMENT_TEAM = D6M5W5BC5A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need to read your water levels from today for this app to work.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "To track water with our app, you need to allow us to write data. We can still show you how much water you've drank today without this.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,17 +307,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Water/Water.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Water/Preview Content\"";
 				DEVELOPMENT_TEAM = D6M5W5BC5A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need to read your water levels from today for this app to work.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "To track water with our app, you need to allow us to write data. We can still show you how much water you've drank today without this.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

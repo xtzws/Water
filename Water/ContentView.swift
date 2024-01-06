@@ -10,10 +10,12 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
+            Image(systemName: "humidity.fill")
+                .symbolEffect(.variableColor.cumulative.dimInactiveLayers.nonReversing)
                 .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+                .foregroundStyle(.blue)
+            Text("The simplest water tracking app is on its way!")
+            Text("Come back in a few days or so.")
         }
         .padding()
     }
