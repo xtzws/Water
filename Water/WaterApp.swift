@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct WaterApp: App {
+    var healthVM = HealthKitViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(healthVM)
         }
     }
 }

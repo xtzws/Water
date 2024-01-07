@@ -8,16 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var hkvm: HealthKitViewModel
+    
     var body: some View {
         VStack {
-            Image(systemName: "humidity.fill")
-                .symbolEffect(.variableColor.cumulative.dimInactiveLayers.nonReversing)
-                .imageScale(.large)
-                .foregroundStyle(.blue)
-            Text("The simplest water tracking app is on its way!")
-            Text("Come back in a few days or so.")
+            if hkvm.isAuthorized {
+                VStack {
+                    Text("Today's Water Consumed")
+                        .font(.title3)
+                    
+                    Text("\(hkvm.userWaterAmount)")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                }
+            } else {
+                VStack {
+                    Text("Please Authorize Health!")
+                        .font(.title3)
+                    
+                    Button {
+                        hkvm.healthRequest()
+                    } label: {
+                        Text("Authorize HealthKit")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: 320, height: 55)
+                    .background(Color(.orange))
+                    .cornerRadius(10)
+                }
+            }
+            
         }
         .padding()
+        .onAppear {
+            hkvm.readWaterTakenToday()
+        }
     }
 }
 
