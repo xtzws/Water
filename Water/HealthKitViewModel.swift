@@ -35,6 +35,20 @@ class HealthKitViewModel: ObservableObject {
         }
     }
     
+    func writeWater(amount: Double) {
+            guard let dietaryWaterType = HKSampleType.quantityType(forIdentifier: .dietaryWater) else {
+                    print("Sample type not available")
+                    return
+            }
+            let waterQuantity = HKQuantity(unit: HKUnit.fluidOunceUS(), doubleValue: amount)
+            let today = Date()
+            let waterQuantitySample = HKQuantitySample(type: dietaryWaterType, quantity: waterQuantity, start: today, end: today)
+            
+            HKHealthStore().save(waterQuantitySample) { (success, error) in
+                print("HK write finished - success: \(success); error: \(String(describing: error))")
+            }
+        }
+    
     func changeAuthorizationStatus() {
         guard let waterQtyType = HKObjectType.quantityType(forIdentifier: .dietaryWater) else { return }
         let status = self.healthStore.authorizationStatus(for: waterQtyType)

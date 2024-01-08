@@ -23,23 +23,22 @@ class HealthKitManager: ObservableObject {
     }
     
     func readWaterAmount(forToday: Date, healthStore: HKHealthStore, completion: @escaping (Double) -> Void) {
-        guard let waterQuantityType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else { return }
+        guard let dietaryWaterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else { return }
         let now = Date()
         let startOfDay = Calendar.current.startOfDay(for: now)
         
         let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
         
-        let query = HKStatisticsQuery(quantityType: waterQuantityType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
+        let query = HKStatisticsQuery(quantityType: dietaryWaterType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
             
             guard let result = result, let sum = result.sumQuantity() else {
                 completion(0.0)
                 return
             }
             
-            completion(sum.doubleValue(for: HKUnit.count()))
+            completion(sum.doubleValue(for: HKUnit.fluidOunceUS()))
         
         }
-        
         healthStore.execute(query)
         
     }
