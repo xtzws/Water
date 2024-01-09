@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var hkvm: HealthKitViewModel
     @State private var dietaryWater: Double?
     @State private var alertShown = false
@@ -16,6 +17,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if hkvm.isAuthorized {
+                
                 VStack {
                     VStack {
                         HStack {
@@ -51,8 +53,8 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)))
                         }
-                        .alert("Please enter how many ounces of water you drank", isPresented: $alertShown) {
-                            TextField("water in ounces", text: $userWaterAmountAdd)
+                        .alert("How many ounces did you drink?", isPresented: $alertShown) {
+                            TextField("Ounces of water", text: $userWaterAmountAdd)
                                 .keyboardType(.decimalPad)
                             Button ("Cancel", role: .cancel) {userWaterAmountAdd = ""}
                             Button ("Add") {
@@ -62,6 +64,8 @@ struct ContentView: View {
                                 } else {
                                     
                                 }
+                                sleep(1)
+                                hkvm.readWaterTakenToday()
                             }
                         }
                     }
@@ -111,6 +115,15 @@ struct ContentView: View {
         .onAppear {
             hkvm.readWaterTakenToday()
         }
+        .onChange(of: scenePhase) {
+                        if scenePhase == .inactive {
+                            hkvm.readWaterTakenToday()
+                        } else if scenePhase == .active {
+                            hkvm.readWaterTakenToday()
+                        } else if scenePhase == .background {
+                            hkvm.readWaterTakenToday()
+                        }
+                    }
     }
 }
 
