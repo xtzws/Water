@@ -22,20 +22,35 @@ struct ContentView: View {
                             Image(systemName: "drop.degreesign.fill")
                             Text("Water today")
                         }
+                        .padding(.top)
+                        Spacer()
                         if hkvm.userWaterAmount != "" {
-                            Text("\(hkvm.userWaterAmount) ounces")
+                            Text("\(hkvm.userWaterAmount)")
                                 .fontWeight(.bold)
+                                .font(.system(size: 100))
                         } else {
-                            Text("0 ounces")
+                            Text("0")
                                 .fontWeight(.bold)
+                                .font(.system(size: 100))
                         }
+                        Spacer()
+                        Text("ounces")
+                            .padding(.bottom)
                     }
+                    .frame(width: 200, height: 200)
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)))
                     
                     VStack {
-                        Button ("Add Water") {
+                        Button {
                             alertShown = true
+                        } label: {
+                            Label("Add water", systemImage: "plus.circle.fill")
+                            .frame(width: 200, height: 70)
+                            .background(.blue)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)))
                         }
-                        .buttonStyle(.bordered)
                         .alert("Please enter how many ounces of water you drank", isPresented: $alertShown) {
                             TextField("water in ounces", text: $userWaterAmountAdd)
                                 .keyboardType(.decimalPad)
