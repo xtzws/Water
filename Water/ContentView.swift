@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var dietaryWater: Double?
     @State private var alertShown = false
     @State private var userWaterAmountAdd: String = ""
+    @State private var scale = 1.0
     
     var body: some View {
         VStack {
@@ -25,17 +26,17 @@ struct ContentView: View {
                             Text("Water today")
                         }
                         .padding(.top)
-                        Spacer()
                         if hkvm.userWaterAmount != "" {
                             Text("\(hkvm.userWaterAmount)")
                                 .fontWeight(.bold)
-                                .font(.system(size: 100))
+                                .font(.system(size: 120))
+                                .fontWidth(.compressed)
                         } else {
                             Text("0")
                                 .fontWeight(.bold)
-                                .font(.system(size: 100))
+                                .font(.system(size: 120))
+                                .fontWidth(.compressed)
                         }
-                        Spacer()
                         Text("ounces")
                             .padding(.bottom)
                     }
@@ -62,9 +63,9 @@ struct ContentView: View {
                                     hkvm.writeWater(amount: Double(userWaterAmountAdd)!) // trust me bro there's something here
                                     userWaterAmountAdd = ""
                                 } else {
-                                    
+
                                 }
-                                sleep(1)
+                                sleep(2)
                                 hkvm.readWaterTakenToday()
                             }
                         }
@@ -74,27 +75,32 @@ struct ContentView: View {
                 ScrollView {
                     VStack (alignment: .leading) {
                         Text("Welcome!")
-                            .font(.largeTitle)
+                            .font(.title)
                             .padding(.bottom)
                         Text("What is this app?")
-                            .font(.title)
-                            .padding(.bottom)
-                        Text("This is my attempt at the simplest water tracker possible. It does exactly two things: read water and record water.")
-                        Text("I also wanted it to be privacy-centric. There are no ads, no in-app purchases, no subscriptions, no trackers, no logins, no settings, etc.")
-                        Text("For extra security, this app stores no data whatsoever. With your explicit permission, this app will connect to the Apple Health app and do neither, one, or both of two things. Read water you've already logged today with another app, and save water you track with this app.")
-                            .padding(.bottom)
-                        Text("Why connect to Apple Health?")
-                            .font(.title)
-                            .padding(.bottom)
-                        Text("There are a few reasons for this. First, it means that no data you save is stored in the app. Apple automatically encrypts all health data on your device, so there are no chances of someone stealing it. Regular app data is not stored the same way, so it is more insecure.")
-                        Text("Second, it means that water you save here can be accessed by other nutrition apps. You deserve to have access to your data. If it was only here, you wouldn't have that access.")
-                        Text("Third, I don't feel like working with app storage when I can pass the job off to something else (that can do it faster, easier, more securely) and it would be redundant. If I wanted your water data to be interoperable, I would have to save it to Health anyway.")
-                            .padding(.bottom)
-                        Text("Important Recap")
                             .font(.title2)
                             .padding(.bottom)
-                        Text("Before you access the permissions, I wanted to recap what happens to your health data. Your health data is never tracked, stored, sold, transmitted, or shared with anyone. It is hard-coded in that we only access water from midnight today, never before. Whatever you drank yesterday? Invisible to us. There are no ads, no monetization on my part, it never has and never will connect to the internet. It will never ask for permissions beyond reading or writing one single piece of data.")
-                        Text("Done reading all this? Before you click the button, know that you can deny either permission. If you allow read but not write, we can show you how much water you have consumed today, but not save any. If you allow write but not read, we can log your water, but only read what you logged with our app. The bar will always show \"0 ounces\". You can, of course, always add and see data in the Apple Health app directly. This app should work mostly fine if you deny either permission.")
+                        Text("This is my attempt at the simplest water tracker possible. It does exactly two things: read water and record water.")
+                            .padding(.bottom)
+                        Text("I also wanted it to be privacy-centric. There are no ads, no in-app purchases, no subscriptions, no trackers, no logins, no settings, no nothin'.")
+                            .padding(.bottom)
+                        Text("Why connect to Apple Health?")
+                            .font(.title2)
+                            .padding(.bottom)
+                        Text("There are a couple reasons for this. First, I'm lazy. I didn't want to learn or deal with storing data. Apple Health has already done it.")
+                            .padding(.bottom)
+                        Text("Second, it means that no data you save is stored in the app. Apple automatically encrypts all health data on your device, so there are no chances of someone stealing it. Regular app data is not stored the same way, so it is less secure.")
+                            .padding(.bottom)
+                        Text("Third, I'm not a thief. There's absolutely no reason why only I should get your water usage.")
+                            .padding(.bottom)
+                        Text("Done reading?")
+                            .font(.title2)
+                            .padding(.bottom)
+                        Text("Before you click the button, know that you can deny either permission. If you allow read but not write, I can show you how much water you have consumed today, but not save any. If you allow write but not read, I can log your water, but only read what you logged with my app.")
+                            .padding(.bottom)
+                        Text("If you want this app to do absolutely nothing, deny read and write access!")
+                            .padding(.bottom)
+                        Text("Made with spite in the USA 🇺🇸🦅🇺🇸🦅🇺🇸🦅🇺🇸")
                             .padding(.bottom)
                         Button {
                             hkvm.healthRequest()
@@ -128,5 +134,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView().environmentObject(HealthKitViewModel())
 }
